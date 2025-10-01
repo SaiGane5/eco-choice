@@ -2,8 +2,8 @@ export const gameScenarios = [
   {
     id: 1,
     title: "Shifting the room after the semester has ended",
-    description: "Shifting the room after the semester has ended",
-    image: "/api/placeholder/400/300",
+    description: "You're moving out of your dorm room after the semester has ended. You have various items including textbooks, clothes, electronics, and personal belongings that need to be disposed of properly.",
+    image: "/sceneImages/1.png",
     timeLimit: 120,
     options: [
       {
@@ -31,8 +31,8 @@ export const gameScenarios = [
   {
     id: 2,
     title: "A birthday Pizza treat at the HFC",
-    description: "A birthday Pizza treat at the HFC",
-    image: "/api/placeholder/400/300",
+    description: "After celebrating a birthday with pizza at the food court, you're left with pizza boxes, condiment packets, napkins, and leftover food. How do you handle the cleanup?",
+    image: "/sceneImages/2.png",
     timeLimit: 120,
     options: [
       {
@@ -60,8 +60,8 @@ export const gameScenarios = [
   {
     id: 3,
     title: "Freshers entering the Hostel with Mattress, Brooms, and other accessories",
-    description: "Freshers entering the Hostel with Mattress, Brooms, and other accessories",
-    image: "/api/placeholder/400/300",
+    description: "As a new student moving into the hostel, you've just received your mattress, cleaning supplies, and other accessories. All items come with various packaging materials including plastic covers, cardboard boxes, and smaller wrappers.",
+    image: "/sceneImages/3.png",
     timeLimit: 120,
     options: [
       {
@@ -89,8 +89,8 @@ export const gameScenarios = [
   {
     id: 4,
     title: "A room filled with Amazon/quick commerce parcels",
-    description: "A room filled with Amazon/quick commerce parcels",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/4.png",
     timeLimit: 120,
     options: [
       {
@@ -118,8 +118,8 @@ export const gameScenarios = [
   {
     id: 5,
     title: "You had a fruit party (mangoes yumm) in hostel",
-    description: "You had a fruit party (mangoes yumm) in hostel",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/5.png",
     timeLimit: 120,
     options: [
       {
@@ -142,8 +142,8 @@ export const gameScenarios = [
   {
     id: 6,
     title: "Friends Birthday Party and you bought FB Cakes with plates, candlesticks, spoons and tissues.",
-    description: "Friends Birthday Party and you bought FB Cakes with plates, candlesticks, spoons and tissues.",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/6.png",
     timeLimit: 120,
     options: [
       {
@@ -171,8 +171,8 @@ export const gameScenarios = [
   {
     id: 7,
     title: "You order parcel food from Mummy-Daddy mess, after finishing the food what would you do?",
-    description: "You order parcel food from Mummy-Daddy mess, after finishing the food what would you do?",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/7.png",
     timeLimit: 120,
     options: [
       {
@@ -200,8 +200,8 @@ export const gameScenarios = [
   {
     id: 8,
     title: "Every wing is following waste segregation in hostel apart from one wing; your wages were reduced",
-    description: "Every wing is following waste segregation in hostel apart from one wing; your wages were reduced",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/8.png",
     timeLimit: 120,
     options: [
       {
@@ -229,8 +229,8 @@ export const gameScenarios = [
   {
     id: 9,
     title: "A lot of mixed-waste is dumped near Velachery gate; deers are dying",
-    description: "A lot of mixed-waste is dumped near Velachery gate; deers are dying",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/9.png",
     timeLimit: 120,
     options: [
       {
@@ -258,8 +258,8 @@ export const gameScenarios = [
   {
     id: 10,
     title: "A lot of plastic is generated due to fast-food consumption and thrown around campus",
-    description: "A lot of plastic is generated due to fast-food consumption and thrown around campus",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/10.png",
     timeLimit: 120,
     options: [
       {
@@ -287,8 +287,8 @@ export const gameScenarios = [
   {
     id: 11,
     title: "Bin near Dean’s room disrupted by monkeys at 8 a.m.",
-    description: "Bin near Dean’s room disrupted by monkeys at 8 a.m.",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/11.png",
     timeLimit: 120,
     options: [
       {
@@ -315,38 +315,9 @@ export const gameScenarios = [
   },
   {
     id: 12,
-    title: "You are the waste collector (Expert team). You see that the bin near to Dean's room at 8 A.M. has been disrupted by monkeys suddenly - with monkeys making the place bad. ",
-    description: "",
-    image: "/api/placeholder/400/300",
-    timeLimit: 120,
-    options: [
-      {
-        id: "a",
-        text: "Collect it fast, put it back in the bin",
-        scores: { environment: 10, society: 15, timeMoney: 35 }
-      },
-      {
-        id: "b",
-        text: "Let it be (my shift is done)",
-        scores: { environment: 20, society: 25, timeMoney: 30 }
-      },
-      {
-        id: "c",
-        text: "Keep it as it is for the Dean tosee and then complain about the uncertainities regarding monkey attacks",
-        scores: { environment: 35, society: 35, timeMoney: 25 }
-      },
-      {
-        id: "d",
-        text: "Remove the bin near the office and keep it somewhere else",
-        scores: { environment: 45, society: 45, timeMoney: 15 }
-      }
-    ]
-  },
-  {
-    id: 13,
     title: "Diabetic student uses insulin twice daily; how to dispose needles and box?",
-    description: "Diabetic student uses insulin twice daily; how to dispose needles and box?",
-    image: "/api/placeholder/400/300",
+    description: "",
+    image: "/sceneImages/12.png",
     timeLimit: 120,
     options: [
       {

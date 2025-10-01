@@ -22,6 +22,15 @@ const QuestionCard = () => {
 
   const currentScenario = gameScenarios[currentScenarioIndex];
 
+  const handleTimeUp = React.useCallback(() => {
+    if (!selectedAnswer) {
+      // Auto-select first option if no answer was given
+      const firstOptionId = currentScenario.options[0].id;
+      answerScenario(currentScenario.id, firstOptionId);
+    }
+    timeUp();
+  }, [selectedAnswer, currentScenario, answerScenario, timeUp]);
+
   // Timer effect
   useEffect(() => {
     if (timeRemaining > 0) {
@@ -33,7 +42,7 @@ const QuestionCard = () => {
     } else if (timeRemaining === 0) {
       handleTimeUp();
     }
-  }, [timeRemaining, updateTime]);
+  }, [timeRemaining, updateTime, handleTimeUp]);
 
   // Check if answer was already given for this scenario
   useEffect(() => {
@@ -46,15 +55,6 @@ const QuestionCard = () => {
       setCanProceed(false);
     }
   }, [currentScenario?.id, userAnswers]);
-
-  const handleTimeUp = () => {
-    if (!selectedAnswer) {
-      // Auto-select first option if no answer was given
-      const firstOptionId = currentScenario.options[0].id;
-      answerScenario(currentScenario.id, firstOptionId);
-    }
-    timeUp();
-  };
 
   const handleAnswerSelect = (optionId) => {
     setSelectedAnswer(optionId);
@@ -96,13 +96,25 @@ const QuestionCard = () => {
             {currentScenario.title}
           </h2>
           
-          {/* Placeholder Image */}
+          {/* Scenario Image */}
           <div className="mb-6">
-            <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <span className="text-4xl mb-2 block">🏠</span>
-                <p className="text-gray-600">Scenario Illustration</p>
-                <p className="text-sm text-gray-500">{currentScenario.title}</p>
+            <div className="w-full h-64 bg-gray-200 rounded-lg overflow-hidden">
+              <img 
+                src={currentScenario.image} 
+                alt={`Scenario: ${currentScenario.title}`}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to placeholder if image fails to load
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+              <div className="w-full h-full flex items-center justify-center text-center" style={{display: 'none'}}>
+                <div>
+                  <span className="text-4xl mb-2 block">🏠</span>
+                  <p className="text-gray-600">Scenario Illustration</p>
+                  <p className="text-sm text-gray-500">{currentScenario.title}</p>
+                </div>
               </div>
             </div>
           </div>

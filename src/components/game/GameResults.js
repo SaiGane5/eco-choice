@@ -12,15 +12,7 @@ const GameResults = () => {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  useEffect(() => {
-    const score = calculateTotalScore(userAnswers);
-    setTotalScore(score);
-    
-    // Auto-save results
-    saveResults(score);
-  }, [userAnswers, setTotalScore]);
-
-  const saveResults = async (score) => {
+  const saveResults = React.useCallback(async (score) => {
     if (!user || saving || saved) return;
     
     setSaving(true);
@@ -39,7 +31,15 @@ const GameResults = () => {
     } finally {
       setSaving(false);
     }
-  };
+  }, [user, saving, saved, userAnswers]);
+
+  useEffect(() => {
+    const score = calculateTotalScore(userAnswers);
+    setTotalScore(score);
+    
+    // Auto-save results
+    saveResults(score);
+  }, [userAnswers, setTotalScore, saveResults]);
 
   const getScoreColor = (score) => {
     if (score >= 40) return 'text-green-600';
