@@ -1,226 +1,373 @@
 export const gameScenarios = [
   {
     id: 1,
-    title: "End of Semester Room Cleanup",
-    description: "You're moving out of your dorm room after the semester has ended. You have various items to dispose of including textbooks, clothes, electronics, and personal belongings.",
-    image: "/api/placeholder/400/300", // Placeholder image URL
-    timeLimit: 120, // 2 minutes in seconds
+    title: "Shifting the room after the semester has ended",
+    description: "Shifting the room after the semester has ended",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
     options: [
       {
-        id: 'a',
+        id: "a",
         text: "Throw everything outside the room",
-        scores: {
-          environment: 10,
-          society: 15,
-          timeMoney: 35
-        }
+        scores: { environment: 10, society: 15, timeMoney: 35 }
       },
       {
-        id: 'b',
-        text: "Throw everything into common bin",
-        scores: {
-          environment: 20,
-          society: 25,
-          timeMoney: 30
-        }
+        id: "b",
+        text: "Throw everyhting into common bin",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
       },
       {
-        id: 'c',
+        id: "c",
         text: "Segregate and throw into different bins",
-        scores: {
-          environment: 40,
-          society: 35,
-          timeMoney: 20
-        }
+        scores: { environment: 35, society: 35, timeMoney: 25 }
       },
       {
-        id: 'd',
-        text: "Segregate and recycle/reuse some items",
-        scores: {
-          environment: 50,
-          society: 45,
-          timeMoney: 15
-        }
+        id: "d",
+        text: "Segregate and reycle/reuse some items",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
       }
     ]
   },
   {
     id: 2,
-    title: "Weekly Grocery Shopping",
-    description: "You're at the grocery store doing your weekly shopping. You need to decide how to handle packaging and bag choices.",
+    title: "A birthday Pizza treat at the HFC",
+    description: "A birthday Pizza treat at the HFC",
     image: "/api/placeholder/400/300",
     timeLimit: 120,
     options: [
       {
-        id: 'a',
-        text: "Use plastic bags for everything",
-        scores: {
-          environment: 15,
-          society: 20,
-          timeMoney: 40
-        }
+        id: "a",
+        text: "Throw the chilli/pepper packets inside the pizza box and dump all the boxes into a paper bag",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
       },
       {
-        id: 'b',
-        text: "Mix of plastic and paper bags",
-        scores: {
-          environment: 25,
-          society: 30,
-          timeMoney: 35
-        }
+        id: "b",
+        text: "Segregate the food waste and throw the other plastic/paper waste into dry waste bins",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
       },
       {
-        id: 'c',
-        text: "Bring reusable bags but buy some packaged items",
-        scores: {
-          environment: 40,
-          society: 35,
-          timeMoney: 25
-        }
+        id: "c",
+        text: "Keep everthing on the table and leave",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
       },
       {
-        id: 'd',
-        text: "Bring reusable bags and choose minimal packaging",
-        scores: {
-          environment: 45,
-          society: 40,
-          timeMoney: 20
-        }
+        id: "d",
+        text: "Segregate the food waste and throw the other plastic/paper waste into the residual waste bins",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
       }
     ]
   },
   {
     id: 3,
-    title: "Old Electronics Disposal",
-    description: "Your old laptop has stopped working and you have an old smartphone you no longer use. How do you dispose of these electronic items?",
+    title: "Freshers entering the Hostel with Mattress, Brooms, and other accessories",
+    description: "Freshers entering the Hostel with Mattress, Brooms, and other accessories",
     image: "/api/placeholder/400/300",
     timeLimit: 120,
     options: [
       {
-        id: 'a',
-        text: "Throw them in regular trash",
-        scores: {
-          environment: 5,
-          society: 10,
-          timeMoney: 45
-        }
+        id: "a",
+        text: "Before coming to campus, connect with seniors through campus groups to acquire used items in good condition (mattress, broom, etc.), avoiding new purchases and packaging waste entirely.",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
       },
       {
-        id: 'b',
-        text: "Leave them in a storage room",
-        scores: {
-          environment: 20,
-          society: 15,
-          timeMoney: 40
-        }
+        id: "b",
+        text: "Unpack everything in a hurry and leave the large plastic mattress cover and all other packaging material in the hostel corridor outside your room.",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
       },
       {
-        id: 'c',
-        text: "Take them to an electronics recycling center",
-        scores: {
-          environment: 45,
-          society: 40,
-          timeMoney: 20
-        }
+        id: "c",
+        text: "Stuff all the packaging—the big plastic cover, cardboard, smaller plastic wrappers—into the nearest common dustbin, even if it overflows.",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
       },
       {
-        id: 'd',
-        text: "Donate working parts and recycle the rest",
-        scores: {
-          environment: 50,
-          society: 45,
-          timeMoney: 15
-        }
+        id: "d",
+        text: "Separate the packaging. Neatly fold the large plastic mattress cover and other plastics for the recycling bin, and put the cardboard and paper tags in the dry waste (blue) bin.",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
       }
     ]
   },
   {
     id: 4,
-    title: "Food Waste at Home",
-    description: "You have leftover food that's approaching its expiry date, and some vegetables that are slightly wilted but still edible.",
+    title: "A room filled with Amazon/quick commerce parcels",
+    description: "A room filled with Amazon/quick commerce parcels",
     image: "/api/placeholder/400/300",
     timeLimit: 120,
     options: [
       {
-        id: 'a',
-        text: "Throw everything in the trash",
-        scores: {
-          environment: 10,
-          society: 15,
-          timeMoney: 35
-        }
+        id: "a",
+        text: "Let the empty boxes, plastic mailers, and bubble wrap pile up in a corner. When it gets too messy, just dump the entire pile in the corridor or near the common bins.",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
       },
       {
-        id: 'b',
-        text: "Throw away bad items, keep the rest",
-        scores: {
-          environment: 25,
-          society: 30,
-          timeMoney: 30
-        }
+        id: "b",
+        text: "Shove all the packaging materials—cardboard, bubble wrap, and plastic bags—into one or two of the largest boxes and throw the whole thing into the general waste area.",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
       },
       {
-        id: 'c',
-        text: "Compost organic waste, save edible food",
-        scores: {
-          environment: 40,
-          society: 35,
-          timeMoney: 25
-        }
+        id: "c",
+        text: "Systematically flatten all the cardboard boxes. Separate the plastic bubble wrap and air pillows. Put the cardboard in the designated paper/dry waste collection point and the plastics in the plastic recycling bin.",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
       },
       {
-        id: 'd',
-        text: "Cook remaining food, share extras, compost scraps",
-        scores: {
-          environment: 50,
-          society: 45,
-          timeMoney: 20
-        }
+        id: "d",
+        text: "Flatten the cardboard boxes and keep them. Post a message on a campus group offering the boxes and bubble wrap for free to anyone who needs them.",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
       }
     ]
   },
   {
     id: 5,
-    title: "Clothing Closet Cleanup",
-    description: "You're cleaning out your closet and found clothes that no longer fit or that you don't wear anymore. Some are in good condition, others are worn out.",
+    title: "You had a fruit party (mangoes yumm) in hostel",
+    description: "You had a fruit party (mangoes yumm) in hostel",
     image: "/api/placeholder/400/300",
     timeLimit: 120,
     options: [
       {
-        id: 'a',
-        text: "Throw all unwanted clothes in trash",
-        scores: {
-          environment: 10,
-          society: 10,
-          timeMoney: 40
-        }
+        id: "a",
+        text: "Wrap all the fruit waste into a paper/plastic and throw it into wet waste bin",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
       },
       {
-        id: 'b',
-        text: "Keep everything 'just in case'",
-        scores: {
-          environment: 25,
-          society: 20,
-          timeMoney: 35
-        }
+        id: "b",
+        text: "Throw the fruit waste outside the room",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
       },
       {
-        id: 'c',
-        text: "Donate good clothes, trash worn out ones",
-        scores: {
-          environment: 35,
-          society: 40,
-          timeMoney: 25
-        }
+        id: "c",
+        text: "Throw the fruit waste in the wet waste bin without any paper/plastic covering",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      }
+    ]
+  },
+  {
+    id: 6,
+    title: "Friends Birthday Party and you bought FB Cakes with plates, candlesticks, spoons and tissues.",
+    description: "Friends Birthday Party and you bought FB Cakes with plates, candlesticks, spoons and tissues.",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Leave all the used plates, spoons, cake boxes, and tissues on the common room table or lawn for the cleaners to handle.",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
       },
       {
-        id: 'd',
-        text: "Donate good clothes, repurpose worn ones as rags",
-        scores: {
-          environment: 45,
-          society: 45,
-          timeMoney: 20
-        }
+        id: "b",
+        text: "Collect everything—leftover cake, plates, spoons, box—into one large bag and dump it in the common hostel bin.",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Segregate the waste properly: leftover cake into the wet waste (green) bin; paper plates, tissues, and the box into the dry waste (blue) bin; and plastic spoons into the plastic recycling bin.",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Plan a zero-waste party by using reusable metal plates and spoons from the hostel mess. After the party, compost the food scraps and recycle the cake box.",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
+      }
+    ]
+  },
+  {
+    id: 7,
+    title: "You order parcel food from Mummy-Daddy mess, after finishing the food what would you do?",
+    description: "You order parcel food from Mummy-Daddy mess, after finishing the food what would you do?",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Leave the container and leftovers on the table, corridor.",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
+      },
+      {
+        id: "b",
+        text: "Throw the container with the leftover food inside it into the nearest general dustbin (common bin).",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Scrape the leftover food into the designated wet waste (green) bin and put the empty, rinsed container into the dry waste (blue) bin.",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Use your own reusable tiffin box to collect the food in the first place, thus avoiding any container waste.",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
+      }
+    ]
+  },
+  {
+    id: 8,
+    title: "Every wing is following waste segregation in hostel apart from one wing; your wages were reduced",
+    description: "Every wing is following waste segregation in hostel apart from one wing; your wages were reduced",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Resign",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
+      },
+      {
+        id: "b",
+        text: "Go room-by-room and convince the students using emotional strategy",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Inform the hostel manager and criticize the behaviour of students through the warden",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Threaten the students because of your inability to take any action",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
+      }
+    ]
+  },
+  {
+    id: 9,
+    title: "A lot of mixed-waste is dumped near Velachery gate; deers are dying",
+    description: "A lot of mixed-waste is dumped near Velachery gate; deers are dying",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Maintain status quo",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
+      },
+      {
+        id: "b",
+        text: "Create a fenced yard around the facility preventing animal access",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Keep the facility outside campus requiring vehicles for transport",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Implement a campus-wide segregation policy with color-coded bins and modest penalties",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
+      }
+    ]
+  },
+  {
+    id: 10,
+    title: "A lot of plastic is generated due to fast-food consumption and thrown around campus",
+    description: "A lot of plastic is generated due to fast-food consumption and thrown around campus",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Maintain the status quo and increase cleaning staff rounds",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
+      },
+      {
+        id: "b",
+        text: "Install more surveillance cameras and impose heavy fines",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Place many dedicated plastic recycling bins across campus",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Launch a Plastic-Free Campus initiative with vendor collaboration and student incentives",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
+      }
+    ]
+  },
+  {
+    id: 11,
+    title: "Bin near Dean’s room disrupted by monkeys at 8 a.m.",
+    description: "Bin near Dean’s room disrupted by monkeys at 8 a.m.",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Collect everything fast and put it back in the bin",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
+      },
+      {
+        id: "b",
+        text: "Let it be (shift is done)",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Keep it as is for the Dean to see, then complain about monkey attacks",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Remove the bin and place it elsewhere",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
+      }
+    ]
+  },
+  {
+    id: 12,
+    title: "You are the waste collector (Expert team). You see that the bin near to Dean's room at 8 A.M. has been disrupted by monkeys suddenly - with monkeys making the place bad. ",
+    description: "",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Collect it fast, put it back in the bin",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
+      },
+      {
+        id: "b",
+        text: "Let it be (my shift is done)",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Keep it as it is for the Dean tosee and then complain about the uncertainities regarding monkey attacks",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Remove the bin near the office and keep it somewhere else",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
+      }
+    ]
+  },
+  {
+    id: 13,
+    title: "Diabetic student uses insulin twice daily; how to dispose needles and box?",
+    description: "Diabetic student uses insulin twice daily; how to dispose needles and box?",
+    image: "/api/placeholder/400/300",
+    timeLimit: 120,
+    options: [
+      {
+        id: "a",
+        text: "Throw the needle and box in the common bin",
+        scores: { environment: 10, society: 15, timeMoney: 35 }
+      },
+      {
+        id: "b",
+        text: "Store the needles and box until enough is collected, then hand to expert team",
+        scores: { environment: 20, society: 25, timeMoney: 30 }
+      },
+      {
+        id: "c",
+        text: "Give the waste directly to expert people daily",
+        scores: { environment: 35, society: 35, timeMoney: 25 }
+      },
+      {
+        id: "d",
+        text: "Throw the waste outside your window",
+        scores: { environment: 45, society: 45, timeMoney: 15 }
       }
     ]
   }
@@ -232,24 +379,23 @@ export const scoreWeights = {
   timeMoney: 0.25
 };
 
-export const calculateTotalScore = (userAnswers) => {
+export const calculateTotalScore = userAnswers => {
   let totalWeightedScore = 0;
-  let totalScenarios = gameScenarios.length;
+  const totalScenarios = gameScenarios.length;
 
   gameScenarios.forEach(scenario => {
     const userAnswer = userAnswers[scenario.id];
     if (userAnswer) {
-      const selectedOption = scenario.options.find(option => option.id === userAnswer);
-      if (selectedOption) {
-        const scenarioScore = 
-          (selectedOption.scores.environment * scoreWeights.environment) +
-          (selectedOption.scores.society * scoreWeights.society) +
-          (selectedOption.scores.timeMoney * scoreWeights.timeMoney);
-        
-        totalWeightedScore += scenarioScore;
+      const selected = scenario.options.find(opt => opt.id === userAnswer);
+      if (selected) {
+        const s =
+          selected.scores.environment * scoreWeights.environment +
+          selected.scores.society * scoreWeights.society +
+          selected.scores.timeMoney * scoreWeights.timeMoney;
+        totalWeightedScore += s;
       }
     }
   });
 
-  return Math.round(totalWeightedScore / totalScenarios * 100) / 100;
+  return Math.round((totalWeightedScore / totalScenarios) * 100) / 100;
 };
