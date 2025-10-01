@@ -1,0 +1,71 @@
+// Firebase Firestore Security Rules for EcoChoice Game
+// Copy and paste these rules into your Firebase Console > Firestore Database > Rules
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Game Results Collection
+    // Users can read and write their own game results
+    match /gameResults/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Validate data structure for writes
+      allow write: if request.auth != null 
+        && request.auth.uid == userId
+        && validateGameResult(request.resource.data);
+    }
+    
+    // Public read access for leaderboard (all authenticated users can read all results)
+    match /gameResults/{document} {
+      allow read: if request.auth != null;
+    }
+    
+    // User Profiles Collection
+    // Users can read and write their own profile data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Validate user profile data
+      allow write: if request.auth != null 
+        && request.auth.uid == userId
+        && validateUserProfile(request.resource.data);
+    }
+    
+    // Game Statistics Collection (optional - for analytics)
+    match /gameStats/{document} {
+      allow read: if request.auth != null;
+      allow write: if false; // Only allow server-side writes
+    }
+    
+    // Admin Collection (for future admin features)
+    match /admin/{document} {
+      allow read, write: if request.auth != null && isAdmin(request.auth.uid);
+    }
+    
+    // Functions to validate data structure
+    function validateGameResult(data) {
+      return data.keys().hasAll(['userAnswers', 'totalScore', 'displayName', 'email', 'timestamp'])
+        && data.totalScore is number
+        && data.totalScore >= 0
+        && data.totalScore <= 50
+        && data.displayName is string
+        && data.email is string
+        && data.timestamp is timestamp
+        && data.userAnswers is map;
+    }
+    
+    function validateUserProfile(data) {
+      return data.keys().hasAll(['lastUpdated'])
+        && data.lastUpdated is timestamp;
+    }
+    
+    function isAdmin(uid) {
+      // Add admin user IDs here when needed
+      return uid in [
+        // "admin-user-id-1",
+        // "admin-user-id-2"
+      ];
+    }
+  }
+}

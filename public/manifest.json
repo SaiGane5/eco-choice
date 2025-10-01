@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "EcoChoice",
+  "name": "EcoChoice Game - Waste Reduction Through Gamification",
+  "description": "Learn sustainable waste management through interactive scenarios and compete globally",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,8 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#22c55e",
+  "background_color": "#f0fdf4",
+  "categories": ["education", "games", "lifestyle"],
+  "orientation": "portrait-primary"
 }
