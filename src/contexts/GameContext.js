@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { gameScenarios } from '../data/gameData';
+import { gameScenarios, checkGameStatus } from '../data/gameData';
 
 const GameContext = createContext();
 
@@ -9,7 +9,10 @@ const initialState = {
   timeRemaining: gameScenarios[0]?.timeLimit || 120,
   gameCompleted: false,
   gameStarted: false,
-  totalScore: 0
+  totalScore: 0,
+  gameLost: false,
+  gameWon: false,
+  categoryScores: { environment: 50, society: 50, timeMoney: 50 }
 };
 
 const gameReducer = (state, action) => {
@@ -23,12 +26,20 @@ const gameReducer = (state, action) => {
       };
     
     case 'ANSWER_SCENARIO':
+      const newAnswers = {
+        ...state.userAnswers,
+        [action.scenarioId]: action.answerId
+      };
+      
+      const gameStatus = checkGameStatus(newAnswers);
+      
       return {
         ...state,
-        userAnswers: {
-          ...state.userAnswers,
-          [action.scenarioId]: action.answerId
-        }
+        userAnswers: newAnswers,
+        categoryScores: gameStatus.categoryScores,
+        gameLost: gameStatus.hasLost,
+        gameWon: gameStatus.hasWon,
+        totalScore: gameStatus.totalScore
       };
     
     case 'NEXT_SCENARIO':
@@ -69,6 +80,20 @@ const gameReducer = (state, action) => {
       return {
         ...initialState,
         timeRemaining: gameScenarios[0]?.timeLimit || 120
+      };
+
+    case 'END_GAME_LOSS':
+      return {
+        ...state,
+        gameLost: true,
+        gameCompleted: true
+      };
+
+    case 'END_GAME_WIN':
+      return {
+        ...state,
+        gameWon: true,
+        gameCompleted: true
       };
     
     default:
@@ -115,6 +140,14 @@ export const GameProvider = ({ children }) => {
     dispatch({ type: 'RESET_GAME' });
   };
 
+  const endGameLoss = () => {
+    dispatch({ type: 'END_GAME_LOSS' });
+  };
+
+  const endGameWin = () => {
+    dispatch({ type: 'END_GAME_WIN' });
+  };
+
   const value = {
     ...state,
     startGame,
@@ -123,7 +156,9 @@ export const GameProvider = ({ children }) => {
     updateTime,
     timeUp,
     setTotalScore,
-    resetGame
+    resetGame,
+    endGameLoss,
+    endGameWin
   };
 
   return (

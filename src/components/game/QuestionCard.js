@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../../contexts/GameContext';
-import { gameScenarios } from '../../data/gameData';
+import { gameScenarios, calculateCategoryScores, checkGameStatus } from '../../data/gameData';
 import Button from '../common/Button';
 import Card from '../common/Card';
 import Timer from '../common/Timer';
@@ -14,13 +14,19 @@ const QuestionCard = () => {
     answerScenario,
     nextScenario,
     updateTime,
-    timeUp
+    timeUp,
+    gameLost,
+    gameWon,
+    endGameLoss
   } = useGame();
 
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [canProceed, setCanProceed] = useState(false);
 
   const currentScenario = gameScenarios[currentScenarioIndex];
+  
+  // Calculate current scores
+  const currentScores = calculateCategoryScores(userAnswers);
 
   const handleTimeUp = React.useCallback(() => {
     if (!selectedAnswer) {
@@ -60,6 +66,17 @@ const QuestionCard = () => {
     setSelectedAnswer(optionId);
     answerScenario(currentScenario.id, optionId);
     setCanProceed(true);
+
+    // Check game status after answering
+    const newAnswers = { ...userAnswers, [currentScenario.id]: optionId };
+    const gameStatus = checkGameStatus(newAnswers);
+    
+    if (gameStatus.hasLost) {
+      // Delay the game end to show the selected answer first
+      setTimeout(() => {
+        endGameLoss();
+      }, 500);
+    }
   };
 
   const handleNext = () => {
@@ -77,8 +94,8 @@ const QuestionCard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 p-4">
       <div className="max-w-4xl mx-auto">
-        {/* Progress and Timer */}
-        <div className="mb-6 grid md:grid-cols-2 gap-4">
+        {/* Progress, Timer, and Live Scores */}
+        <div className="mb-6 grid md:grid-cols-3 gap-4">
           <ProgressBar 
             current={currentScenarioIndex + 1} 
             total={gameScenarios.length} 
@@ -88,6 +105,31 @@ const QuestionCard = () => {
             totalTime={currentScenario.timeLimit}
             onTimeUp={handleTimeUp}
           />
+          
+          {/* Live Score Display */}
+          <Card className="p-3">
+            <h3 className="text-sm font-semibold text-gray-700 mb-2 text-center">Live Scores</h3>
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <div className="text-center">
+                <div className="text-green-600 font-semibold">🌍</div>
+                <div className={`font-bold ${currentScores.environment < 20 ? 'text-red-600' : currentScores.environment < 35 ? 'text-yellow-600' : 'text-green-600'}`}>
+                  {currentScores.environment}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-blue-600 font-semibold">👥</div>
+                <div className={`font-bold ${currentScores.society < 20 ? 'text-red-600' : currentScores.society < 35 ? 'text-yellow-600' : 'text-blue-600'}`}>
+                  {currentScores.society}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-purple-600 font-semibold">⏰</div>
+                <div className={`font-bold ${currentScores.timeMoney < 20 ? 'text-red-600' : currentScores.timeMoney < 35 ? 'text-yellow-600' : 'text-purple-600'}`}>
+                  {currentScores.timeMoney}
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
 
         {/* Scenario Card */}
@@ -149,34 +191,6 @@ const QuestionCard = () => {
                   <p className="text-gray-900 font-medium">
                     {option.text}
                   </p>
-                  {selectedAnswer === option.id && (
-                    <div className="mt-3 grid grid-cols-3 gap-4 text-sm">
-                      <div className="text-center">
-                        <span className="block text-green-600 font-semibold">
-                          Environment
-                        </span>
-                        <span className="text-green-700">
-                          {option.scores.environment}/50
-                        </span>
-                      </div>
-                      <div className="text-center">
-                        <span className="block text-blue-600 font-semibold">
-                          Society
-                        </span>
-                        <span className="text-blue-700">
-                          {option.scores.society}/50
-                        </span>
-                      </div>
-                      <div className="text-center">
-                        <span className="block text-purple-600 font-semibold">
-                          Time/Money
-                        </span>
-                        <span className="text-purple-700">
-                          {option.scores.timeMoney}/50
-                        </span>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </Card>

@@ -8,13 +8,17 @@ import Login from './components/auth/Login';
 import GameHome from './components/game/GameHome';
 import QuestionCard from './components/game/QuestionCard';
 import GameResults from './components/game/GameResults';
+import GameLoss from './components/game/GameLoss';
 import Leaderboard from './components/leaderboard/Leaderboard';
 
 // Main Game Component
 const GameFlow = () => {
-  const { gameStarted, gameCompleted } = useGame();
+  const { gameStarted, gameCompleted, gameLost, gameWon } = useGame();
 
   if (gameCompleted) {
+    if (gameLost) {
+      return <GameLoss />;
+    }
     return <GameResults />;
   }
 

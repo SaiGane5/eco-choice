@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useGame } from '../../contexts/GameContext';
 import { useAuth } from '../../contexts/AuthContext';
-import { calculateTotalScore, gameScenarios, scoreWeights } from '../../data/gameData';
+import { calculateTotalScore, calculateCategoryScores, gameScenarios, scoreWeights } from '../../data/gameData';
 import { saveGameResult } from '../../firebase/firestore';
 import Button from '../common/Button';
 import Card from '../common/Card';
 
 const GameResults = () => {
-  const { userAnswers, totalScore, setTotalScore, resetGame } = useGame();
+  const { userAnswers, totalScore, setTotalScore, resetGame, gameWon } = useGame();
   const { user } = useAuth();
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const saveResults = React.useCallback(async (score) => {
-    if (!user || saving || saved) return;
+    // Only save results if the player won the game
+    if (!user || saving || saved || !gameWon) return;
     
     setSaving(true);
     try {
@@ -31,7 +32,7 @@ const GameResults = () => {
     } finally {
       setSaving(false);
     }
-  }, [user, saving, saved, userAnswers]);
+  }, [user, saving, saved, userAnswers, gameWon]);
 
   useEffect(() => {
     const score = calculateTotalScore(userAnswers);
@@ -55,33 +56,7 @@ const GameResults = () => {
     return '🌱 Keep learning about sustainability!';
   };
 
-  const calculateCategoryScores = () => {
-    let totalEnvironment = 0;
-    let totalSociety = 0;
-    let totalTimeMoney = 0;
-    let answeredScenarios = 0;
-
-    gameScenarios.forEach(scenario => {
-      const userAnswer = userAnswers[scenario.id];
-      if (userAnswer) {
-        const selectedOption = scenario.options.find(option => option.id === userAnswer);
-        if (selectedOption) {
-          totalEnvironment += selectedOption.scores.environment;
-          totalSociety += selectedOption.scores.society;
-          totalTimeMoney += selectedOption.scores.timeMoney;
-          answeredScenarios++;
-        }
-      }
-    });
-
-    return {
-      environment: answeredScenarios > 0 ? Math.round(totalEnvironment / answeredScenarios) : 0,
-      society: answeredScenarios > 0 ? Math.round(totalSociety / answeredScenarios) : 0,
-      timeMoney: answeredScenarios > 0 ? Math.round(totalTimeMoney / answeredScenarios) : 0
-    };
-  };
-
-  const categoryScores = calculateCategoryScores();
+  const categoryScores = calculateCategoryScores(userAnswers);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 p-4">
@@ -115,6 +90,12 @@ const GameResults = () => {
               ✅ Results saved to leaderboard!
             </div>
           )}
+
+          {gameWon && !saved && !saving && (
+            <div className="text-green-600 mb-4">
+              🎊 Congratulations! You completed the game successfully!
+            </div>
+          )}
         </Card>
 
         {/* Category Breakdown */}
@@ -130,7 +111,7 @@ const GameResults = () => {
               </div>
               <h3 className="font-semibold text-green-800 mb-1">Environment</h3>
               <div className="text-2xl font-bold text-green-600 mb-1">
-                {categoryScores.environment}/50
+                {categoryScores.environment}
               </div>
               <div className="text-sm text-gray-600">
                 Weight: {Math.round(scoreWeights.environment * 100)}%
@@ -138,7 +119,7 @@ const GameResults = () => {
               <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                 <div 
                   className="bg-green-500 h-2 rounded-full"
-                  style={{ width: `${(categoryScores.environment / 50) * 100}%` }}
+                  style={{ width: `${Math.max(0, Math.min(100, categoryScores.environment * 2))}%` }}
                 />
               </div>
             </div>
@@ -149,7 +130,7 @@ const GameResults = () => {
               </div>
               <h3 className="font-semibold text-blue-800 mb-1">Society</h3>
               <div className="text-2xl font-bold text-blue-600 mb-1">
-                {categoryScores.society}/50
+                {categoryScores.society}
               </div>
               <div className="text-sm text-gray-600">
                 Weight: {Math.round(scoreWeights.society * 100)}%
@@ -157,7 +138,7 @@ const GameResults = () => {
               <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                 <div 
                   className="bg-blue-500 h-2 rounded-full"
-                  style={{ width: `${(categoryScores.society / 50) * 100}%` }}
+                  style={{ width: `${Math.max(0, Math.min(100, categoryScores.society * 2))}%` }}
                 />
               </div>
             </div>
@@ -168,7 +149,7 @@ const GameResults = () => {
               </div>
               <h3 className="font-semibold text-purple-800 mb-1">Time/Money</h3>
               <div className="text-2xl font-bold text-purple-600 mb-1">
-                {categoryScores.timeMoney}/50
+                {categoryScores.timeMoney}
               </div>
               <div className="text-sm text-gray-600">
                 Weight: {Math.round(scoreWeights.timeMoney * 100)}%
@@ -176,7 +157,7 @@ const GameResults = () => {
               <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                 <div 
                   className="bg-purple-500 h-2 rounded-full"
-                  style={{ width: `${(categoryScores.timeMoney / 50) * 100}%` }}
+                  style={{ width: `${Math.max(0, Math.min(100, categoryScores.timeMoney * 2))}%` }}
                 />
               </div>
             </div>
@@ -206,14 +187,14 @@ const GameResults = () => {
                         <strong>Your choice:</strong> {selectedOption.text}
                       </p>
                       <div className="grid grid-cols-3 gap-4 text-sm">
-                        <span className="text-green-600">
-                          🌍 Environment: {selectedOption.scores.environment}
+                        <span className={`${selectedOption.scores.environment >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          🌍 Environment: {selectedOption.scores.environment > 0 ? '+' : ''}{selectedOption.scores.environment}
                         </span>
-                        <span className="text-blue-600">
-                          👥 Society: {selectedOption.scores.society}
+                        <span className={`${selectedOption.scores.society >= 0 ? 'text-blue-600' : 'text-red-600'}`}>
+                          👥 Society: {selectedOption.scores.society > 0 ? '+' : ''}{selectedOption.scores.society}
                         </span>
-                        <span className="text-purple-600">
-                          ⏰ Time/Money: {selectedOption.scores.timeMoney}
+                        <span className={`${selectedOption.scores.timeMoney >= 0 ? 'text-purple-600' : 'text-red-600'}`}>
+                          ⏰ Time/Money: {selectedOption.scores.timeMoney > 0 ? '+' : ''}{selectedOption.scores.timeMoney}
                         </span>
                       </div>
                     </div>
