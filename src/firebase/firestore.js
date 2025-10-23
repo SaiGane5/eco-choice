@@ -6,7 +6,8 @@ import {
   getDocs, 
   query, 
   orderBy, 
-  limit 
+  limit,
+  where 
 } from 'firebase/firestore';
 import { db } from './config';
 
@@ -41,11 +42,12 @@ export const getUserGameResult = async (userId) => {
   }
 };
 
-// Get leaderboard (top 10 scores)
+// Get leaderboard (top 10 scores from winners only)
 export const getLeaderboard = async () => {
   try {
     const q = query(
       collection(db, 'gameResults'), 
+      where('gameWon', '==', true),  // Only show winners on leaderboard
       orderBy('totalScore', 'desc'), 
       limit(10)
     );
@@ -62,6 +64,30 @@ export const getLeaderboard = async () => {
     return leaderboard;
   } catch (error) {
     console.error('Error getting leaderboard:', error);
+    throw error;
+  }
+};
+
+// Get all game results for analytics (including winners and losers)
+export const getAllGameResults = async () => {
+  try {
+    const q = query(
+      collection(db, 'gameResults'), 
+      orderBy('timestamp', 'desc')
+    );
+    const querySnapshot = await getDocs(q);
+    
+    const allResults = [];
+    querySnapshot.forEach((doc) => {
+      allResults.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    
+    return allResults;
+  } catch (error) {
+    console.error('Error getting all game results:', error);
     throw error;
   }
 };

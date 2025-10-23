@@ -18,19 +18,25 @@ const GameHome = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 py-6">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900">
-              🌱 EcoChoice Game
-            </h1>
-            <div className="flex items-center gap-4">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">EcoChoice</h1>
+              <p className="text-sm text-gray-500 mt-1">Sustainable Decision Making</p>
+            </div>
+            <div className="flex items-center gap-6">
               <span className="text-sm text-gray-600">
-                Welcome, {user?.displayName || 'Player'}!
+                {user?.displayName || 'Player'}
               </span>
-              <Button variant="outline" size="small" onClick={handleSignOut}>
+              <Button 
+                variant="outline" 
+                size="small" 
+                onClick={handleSignOut}
+                className="text-gray-600 border-gray-300 hover:bg-gray-50"
+              >
                 Sign Out
               </Button>
             </div>
@@ -39,82 +45,89 @@ const GameHome = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Ready to Make a Difference?
+      <main className="max-w-4xl mx-auto px-6 py-16">
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-light text-gray-900 mb-6 leading-tight">
+            Test Your Sustainability<br />
+            <span className="font-semibold">Decision Making</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Test your environmental decision-making skills through 5 real-life scenarios. 
-            Each choice impacts the environment, society, and resource efficiency.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Navigate through real-world scenarios and see how your choices impact 
+            the environment, society, and economic efficiency.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <Card>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎯</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">5 Scenarios</h3>
-              <p className="text-gray-600">
-                Face real-life situations from dorm cleanups to grocery shopping decisions.
-              </p>
-            </div>
-          </Card>
-
-          <Card>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">⏱️</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">2 Minutes per Question</h3>
-              <p className="text-gray-600">
-                Think fast! You have limited time to make each decision.
-              </p>
-            </div>
-          </Card>
-
-          <Card>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🏆</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Global Leaderboard</h3>
-              <p className="text-gray-600">
-                Compete with players worldwide and see how you rank!
-              </p>
-            </div>
-          </Card>
-
-          <Card>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📊</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Three Score Categories</h3>
-              <p className="text-gray-600">
-                Environment (40%), Society (35%), and Time/Money (25%) efficiency.
-              </p>
-            </div>
-          </Card>
+        {/* Game Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="text-center">
+            <div className="text-3xl font-semibold text-gray-900 mb-2">12</div>
+            <div className="text-sm text-gray-600 uppercase tracking-wide">Scenarios</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-semibold text-gray-900 mb-2">2:00</div>
+            <div className="text-sm text-gray-600 uppercase tracking-wide">Per Question</div>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-semibold text-gray-900 mb-2">3</div>
+            <div className="text-sm text-gray-600 uppercase tracking-wide">Score Categories</div>
+          </div>
         </div>
 
+        {/* Scoring System */}
+        <div className="bg-gray-50 rounded-2xl p-8 mb-16">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">How It Works</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl">🌍</span>
+              </div>
+              <h4 className="font-medium text-gray-900 mb-2">Environment</h4>
+              <p className="text-sm text-gray-600">40% weight</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl">👥</span>
+              </div>
+              <h4 className="font-medium text-gray-900 mb-2">Society</h4>
+              <p className="text-sm text-gray-600">35% weight</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-xl">⚡</span>
+              </div>
+              <h4 className="font-medium text-gray-900 mb-2">Efficiency</h4>
+              <p className="text-sm text-gray-600">25% weight</p>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
         <div className="text-center">
-          <Card className="max-w-md mx-auto" padding="large">
-            <h3 className="text-xl font-semibold mb-4">Ready to Start?</h3>
-            <p className="text-gray-600 mb-6">
-              Your choices matter! Each decision will be scored based on its impact on environmental sustainability, 
-              social responsibility, and resource efficiency.
-            </p>
+          <div className="max-w-md mx-auto">
             <Button 
               onClick={startGame}
               size="large"
-              className="w-full"
+              className="w-full py-4 text-lg font-medium bg-gray-900 hover:bg-gray-800 text-white border-gray-900"
             >
-              🌍 Start Game
+              Start Assessment
             </Button>
-          </Card>
+            <p className="text-xs text-gray-500 mt-4">
+              Complete all scenarios to qualify for the global leaderboard
+            </p>
+          </div>
+        </div>
+
+        {/* Navigation */}
+        <div className="flex justify-center mt-12">
+          <Button 
+            variant="outline" 
+            size="small"
+            onClick={() => window.location.href = '/leaderboard'}
+            className="text-gray-600 border-gray-300 hover:bg-gray-50"
+          >
+            View Leaderboard
+          </Button>
         </div>
       </main>
     </div>

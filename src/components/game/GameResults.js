@@ -13,8 +13,8 @@ const GameResults = () => {
   const [saved, setSaved] = useState(false);
 
   const saveResults = React.useCallback(async (score) => {
-    // Only save results if the player won the game
-    if (!user || saving || saved || !gameWon) return;
+    // Save results for all players (winners and losers)
+    if (!user || saving || saved) return;
     
     setSaving(true);
     try {
@@ -24,7 +24,9 @@ const GameResults = () => {
         displayName: user.displayName,
         email: user.email,
         photoURL: user.photoURL,
-        completedAt: new Date()
+        completedAt: new Date(),
+        gameWon: gameWon,  // Track if player won or lost
+        categoryScores: calculateCategoryScores(userAnswers)
       });
       setSaved(true);
     } catch (error) {
@@ -85,9 +87,15 @@ const GameResults = () => {
             </div>
           )}
 
-          {saved && (
+          {saved && gameWon && (
             <div className="text-green-600 mb-4">
               ✅ Results saved to leaderboard!
+            </div>
+          )}
+
+          {saved && !gameWon && (
+            <div className="text-green-600 mb-4">
+              ✅ Results saved for analysis!
             </div>
           )}
 

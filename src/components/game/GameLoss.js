@@ -1,14 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGame } from '../../contexts/GameContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { calculateCategoryScores, calculateTotalScore, WIN_LOSE_THRESHOLDS } from '../../data/gameData';
+import { saveGameResult } from '../../firebase/firestore';
 import Button from '../common/Button';
 import Card from '../common/Card';
 
 const GameLoss = () => {
   const { userAnswers, resetGame } = useGame();
+  const { user } = useAuth();
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   
   const categoryScores = calculateCategoryScores(userAnswers);
   const totalScore = calculateTotalScore(userAnswers);
+
+  // Save results for losing players
+  const saveResults = React.useCallback(async () => {
+    if (!user || saving || saved) return;
+    
+    setSaving(true);
+    try {
+      await saveGameResult(user.uid, {
+        userAnswers,
+        totalScore: totalScore,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        completedAt: new Date(),
+        gameWon: false,  // Player lost
+        categoryScores: categoryScores
+      });
+      setSaved(true);
+    } catch (error) {
+      console.error('Error saving results:', error);
+    } finally {
+      setSaving(false);
+    }
+  }, [user, saving, saved, userAnswers, totalScore, categoryScores]);
+
+  // Auto-save results when component mounts
+  useEffect(() => {
+    saveResults();
+  }, [saveResults]);
 
   const getFailureReason = () => {
     const reasons = [];
@@ -65,6 +99,18 @@ const GameLoss = () => {
               ))}
             </ul>
           </div>
+
+          {saving && (
+            <div className="text-blue-600 mb-4">
+              💾 Saving your results...
+            </div>
+          )}
+
+          {saved && (
+            <div className="text-green-600 mb-4">
+              ✅ Results saved for analysis!
+            </div>
+          )}
         </Card>
 
         {/* Score Breakdown */}
