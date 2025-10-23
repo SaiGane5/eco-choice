@@ -382,8 +382,8 @@ export const scoreWeights = {
 export const INITIAL_CREDITS = 50;
 
 export const WIN_LOSE_THRESHOLDS = {
-  minCategoryScore: 10,  // Minimum score required for each category
-  minTotalScore: 20      // Minimum total weighted score to continue
+  minCategoryScore: 30,  // Minimum score required for each category
+  minTotalScore: 100      // Minimum total weighted score to continue
 };
 
 export const calculateCategoryScores = userAnswers => {
