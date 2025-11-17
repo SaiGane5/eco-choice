@@ -61,7 +61,7 @@ const GameHome = () => {
         {/* Game Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="text-center">
-            <div className="text-3xl font-semibold text-gray-900 mb-2">12</div>
+            <div className="text-3xl font-semibold text-gray-900 mb-2">25</div>
             <div className="text-sm text-gray-600 uppercase tracking-wide">Scenarios</div>
           </div>
           <div className="text-center">
@@ -96,7 +96,7 @@ const GameHome = () => {
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <span className="text-xl">⚡</span>
               </div>
-              <h4 className="font-medium text-gray-900 mb-2">Efficiency</h4>
+              <h4 className="font-medium text-gray-900 mb-2">Money/Time</h4>
               <p className="text-sm text-gray-600">25% weight</p>
             </div>
           </div>
